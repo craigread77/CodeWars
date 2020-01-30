@@ -1,15 +1,23 @@
 import re
 def increment_string(strng):
-    if strng[len(strng)-1].isalpha():
-        return strng + '1'
-    elif strng == '':
+    
+
+    if strng == '':
         return '1'
 
-    stringRegex = re.compile(r'([A-Za-z]*)(0*)(\d*)')
+    elif strng[len(strng)-1].isalpha():
+        return strng + '1'
 
-    word = stringRegex.match(strng).groups()[0]
-    zeroes = stringRegex.match(strng).groups()[1]
-    num = stringRegex.match(strng).groups()[2]
+
+    stringRegex = re.compile(r'([A-Za-z/.\@#$%^&*,!`]*)(0*)(\d*)$')
+
+    if stringRegex.match(strng) != None:
+
+        word = stringRegex.match(strng).groups()[0]
+        zeroes = stringRegex.match(strng).groups()[1]
+        num = stringRegex.match(strng).groups()[2]
+    else:
+        return None
 
     if len(num) < 1:
         zeroes = zeroes[:len(zeroes)-1] + '1'
